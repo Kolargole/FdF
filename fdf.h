@@ -6,7 +6,7 @@
 /*   By: vimercie <vimercie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 17:32:53 by vimercie          #+#    #+#             */
-/*   Updated: 2022/03/16 16:28:11 by vimercie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/22 16:11:04 by vimercie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ typedef struct s_vars
 	void	*mlx;
 	void	*win;
 }				t_vars;
+
+typedef struct s_coords
+{
+	size_t	x;
+	size_t	y;
+}				t_coords;
 
 int	event_hook(t_vars *vars);
 int	key_hook(int key_code, t_vars *vars);

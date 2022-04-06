@@ -6,48 +6,61 @@
 /*   By: vimercie <vimercie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 11:44:25 by vimercie          #+#    #+#             */
-/*   Updated: 2022/03/22 23:44:32 by vimercie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/25 18:52:06 by vimercie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fdf.h>
+#include "fdf.h"
 
-void    put_points(int fd, size_t width, size_t height)
+int	*tab_atoi(char **tab_str)
 {
-    char        *line;
-    char        **map;
-    t_coords    coords;
-    size_t      i;
-    size_t      j;
+	int	i;
+	int	size;
+	int	*res;
 
-    line = "";
-    i = 0;
-    j = 0;
-    while (line != NULL)
-    {
-        line = get_next_line(fd, BUFFER_SIZE);
-        map = ft_split(line, ' ');
-        coords.y = j * map_size(height, map[j]);
-        while (convert[i])
-            {
-                coords.x = i * map_size(width, map[j]);
-                my_mlx_pixel_put(&img, coords.x, coords.y, 0x00FF0000);
-                i++;
-            }
-        j++;
-    }
+	size = 0;
+	i = 0;
+	while (tab_str[size])
+		size++;
+	res = ft_calloc(sizeof(int), size + 1);
+	while (tab_str[i])
+	{
+		res[i] = ft_atoi(tab_str[i]);
+		i++;
+	}
+	return (res);
 }
 
-size_t  map_size(size_t length, char *line)
+void	put_points(int fd, t_fdf fdf)
 {
-    size_t  i;
-    size_t  size;
-    size_t  offset;
+	size_t		i;
+	size_t		j;
 
-    line_size = 0;
-    while (line[line_size])
-        line_size++;
-    offset = (length / (line_size * 2)) / 2;
-    size = length / (line_size * 2) + offset;
-    return (size);
+	fdf.line = "";
+	i = 0;
+	j = 0;
+	while (fdf.line != NULL)
+	{
+		fdf.line = get_next_line(fd);
+		fdf.split_line = ft_split(fdf.line, ' ');
+		//fdf.map[i] = tab_atoi(fdf.split_line);
+		tab_atoi(fdf.split_line);
+		i++;
+	}
 }
+
+// coords.y = j * map_size(height, map[j]);
+
+// size_t	map_size(size_t length, char *line)
+// {
+// 	size_t	size;
+// 	size_t	offset;
+// 	size_t	line_size;
+
+// 	line_size = 0;
+// 	while (line[line_size])
+// 		line_size++;
+// 	offset = (length / (line_size * 2)) / 2;
+// 	size = length / (line_size * 2) + offset;
+// 	return (size);
+// }
